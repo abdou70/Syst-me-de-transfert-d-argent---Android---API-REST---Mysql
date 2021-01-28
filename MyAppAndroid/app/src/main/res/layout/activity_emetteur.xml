@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.circularreveal.CircularRevealRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EmetteurActivity">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txt_nom"
+            android:layout_marginTop="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawablePadding="5dp"
+            android:ems="10"
+            android:hint="Nom"
+            android:inputType="text"
+            android:paddingLeft="0dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/purple_500"
+            android:textSize="30dp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txt_prenom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:ems="10"
+                android:hint="Prenom"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/black"
+                android:paddingLeft="0dp"
+                android:drawablePadding="5dp"
+                android:textColorHint="@color/purple_500"
+                android:textSize="30dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txt_tel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:ems="10"
+                    android:hint="Telephone"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/black"
+                    android:paddingLeft="0dp"
+                    android:drawablePadding="5dp"
+                    android:textColorHint="@color/purple_500"
+                    android:textSize="30dp"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txt_cni"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:ems="10"
+                        android:hint="CNI"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/black"
+                        android:paddingLeft="0dp"
+                        android:drawablePadding="5dp"
+                        android:textColorHint="@color/purple_500"
+                        android:textSize="30dp" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/txt_mont"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="text"
+                            android:ems="10"
+                            android:hint="Montant"
+                            android:layout_marginTop="10dp"
+                            android:textColor="@color/black"
+                            android:paddingLeft="0dp"
+                            android:drawablePadding="5dp"
+                            android:textColorHint="@color/purple_500"
+                            android:textSize="30dp" />
+
+                        <Button
+                            android:id="@+id/button_recepteur"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginBottom="57dp"
+                            android:layout_centerHorizontal="true"
+                            android:text="Enregistrer un recepteur" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </com.google.android.material.textfield.TextInputLayout>
+        />
+    </com.google.android.material.textfield.TextInputLayout>
+</com.google.android.material.circularreveal.CircularRevealRelativeLayout>
+
+
