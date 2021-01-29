@@ -96,6 +96,20 @@
                             android:textColorHint="@color/purple_500"
                             android:textSize="30dp" />
 
+                        <TextView
+                            android:id="@+id/txt_envoie"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="text"
+                            android:ems="10"
+                            android:hint="emetteur"
+                            android:layout_marginTop="10dp"
+                            android:textColor="@color/black"
+                            android:paddingLeft="0dp"
+                            android:drawablePadding="5dp"
+                            android:textColorHint="@color/purple_500"
+                            android:textSize="30dp" />
+
                         <Button
                             android:id="@+id/button_recepteur"
                             android:layout_width="wrap_content"
