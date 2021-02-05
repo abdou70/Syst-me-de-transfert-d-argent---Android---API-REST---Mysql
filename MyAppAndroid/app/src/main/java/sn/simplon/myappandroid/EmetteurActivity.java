@@ -69,73 +69,73 @@ public class EmetteurActivity extends AppCompatActivity {
 
 
                 //                //CALL BACKEND
-              String url = "http://192.168.1.19:8080/Emetteur/liste";
-                txt_envoie = (TextView) findViewById(R.id.txt_envoie);
-
-                RequestQueue requestQueue = Volley.newRequestQueue(EmetteurActivity.this);
-                JsonArrayRequest objectRequest = new JsonArrayRequest(
-                        Request.Method.GET,
-                        url,
-                        null,
-                        new Response.Listener<JSONArray>() {
-                            @Override
-                            public void onResponse(JSONArray response) {
-
-                                String result = response.toString();
-                                txt_envoie.setText(result);
-
-
-                            }
-                        },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                String result = error.toString();
-                                System.out.println(error);
-                                txt_envoie.setText(result);
-
-                                String message = null;
-                                if (error instanceof ServerError) {
-                                    message = "Cannot connect to Inte1...Please check your connection!";
-                                    txt_envoie.setText(message);
-
-                                } else if (error instanceof TimeoutError) {
-                                    message = "The server could not be found. Please try again after some time!!";
-                                    txt_envoie.setText(message);
-
-                                } else if (error instanceof AuthFailureError) {
-                                    message = "Cannot connect to Int2...Please check your connection!";
-                                    txt_envoie.setText(message);
-
-                                } else if (error instanceof ParseError) {
-                                    message = "Parsing error! Please try again after some time!!";
-                                    txt_envoie.setText(message);
-
-                                } else if (error instanceof NetworkError ) {
-                                    message = "Cannot connect to Int3...Please check your connection!";
-                                    txt_envoie.setText(message);
-
-                                } else if (error instanceof NoConnectionError) {
-                                    message = "Connection TimeOut! Please check your internet connection.";
-                                    txt_envoie.setText(message);
-
-                                }
-                            }
-                        }
-
-
-                );
-
-                requestQueue.add(objectRequest);
-
-
-
-//              postData(emetteur);
+//              String url = "http://192.168.1.19:8080/Emetteur/liste";
+//                txt_envoie = (TextView) findViewById(R.id.txt_envoie);
+//
+//                RequestQueue requestQueue = Volley.newRequestQueue(EmetteurActivity.this);
+//                JsonArrayRequest objectRequest = new JsonArrayRequest(
+//                        Request.Method.GET,
+//                        url,
+//                        null,
+//                        new Response.Listener<JSONArray>() {
+//                            @Override
+//                            public void onResponse(JSONArray response) {
+//
+//                                String result = response.toString();
+//                                txt_envoie.setText(result);
 //
 //
-//              Intent recepActivity = new Intent(getApplicationContext(), RecepteurActivity.class);
-//              startActivity(recepActivity);
-//                finish();
+//                            }
+//                        },
+//                        new Response.ErrorListener() {
+//                            @Override
+//                            public void onErrorResponse(VolleyError error) {
+//                                String result = error.toString();
+//                                System.out.println(error);
+//                                txt_envoie.setText(result);
+//
+//                                String message = null;
+//                                if (error instanceof ServerError) {
+//                                    message = "Cannot connect to Inte1...Please check your connection!";
+//                                    txt_envoie.setText(message);
+//
+//                                } else if (error instanceof TimeoutError) {
+//                                    message = "The server could not be found. Please try again after some time!!";
+//                                    txt_envoie.setText(message);
+//
+//                                } else if (error instanceof AuthFailureError) {
+//                                    message = "Cannot connect to Int2...Please check your connection!";
+//                                    txt_envoie.setText(message);
+//
+//                                } else if (error instanceof ParseError) {
+//                                    message = "Parsing error! Please try again after some time!!";
+//                                    txt_envoie.setText(message);
+//
+//                                } else if (error instanceof NetworkError ) {
+//                                    message = "Cannot connect to Int3...Please check your connection!";
+//                                    txt_envoie.setText(message);
+//
+//                                } else if (error instanceof NoConnectionError) {
+//                                    message = "Connection TimeOut! Please check your internet connection.";
+//                                    txt_envoie.setText(message);
+//
+//                                }
+//                            }
+//                        }
+//
+//
+//                );
+
+//                requestQueue.add(objectRequest);
+
+
+
+             postData(emetteur);
+
+
+              Intent recepActivity = new Intent(getApplicationContext(), RecepteurActivity.class);
+             startActivity(recepActivity);
+             finish();
             }
         });
     }
@@ -151,12 +151,13 @@ public void postData(Emetteur emetteur){
 
     try{
         object.put("emetteur", emetteur);
+        System.out.println(emetteur);
     }catch(JSONException e){
         e.printStackTrace();
 
     }
 
-    String url = "http://192.168.122.1:8080/Emetteur/save";
+    String url = "http://192.168.1.19:8080/Emetteur/save";
 
     JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url,object, new Response.Listener<JSONObject>() {
         @Override
