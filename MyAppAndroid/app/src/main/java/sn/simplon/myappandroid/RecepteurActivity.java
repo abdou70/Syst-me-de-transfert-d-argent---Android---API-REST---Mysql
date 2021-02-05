@@ -2,7 +2,6 @@ package sn.simplon.myappandroid;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -64,7 +63,7 @@ public class RecepteurActivity extends AppCompatActivity {
                 recepteur.setCni(txt_cni.getText().toString());
                 recepteur.setMontant_recu(txt_mont.getText().toString());
 
-                String url = "http://192.168.1.27:8080/Recepteur/liste";
+                String url = "http://192.168.122.1:8080/Recepteur/liste";
                 txt_recu = (TextView) findViewById(R.id.txt_recu);
 
                 RequestQueue requestQueue = Volley.newRequestQueue(RecepteurActivity.this);
@@ -79,11 +78,11 @@ public class RecepteurActivity extends AppCompatActivity {
                             @Override
                             public void onErrorResponse(VolleyError error) {
                                 String message = null;
-                                if (error instanceof ServerError) {
+                                if (error instanceof NetworkError ) {
                                     message = "Cannot connect to Inte1...Please check your connection!";
                                     txt_recu.setText(message);
 
-                                } else if (error instanceof NetworkError) {
+                                } else if (error instanceof ServerError) {
                                     message = "The server could not be found. Please try again after some time!!";
                                     txt_recu.setText(message);
 
@@ -107,6 +106,8 @@ public class RecepteurActivity extends AppCompatActivity {
                             }
                         }
                 );
+
+                requestQueue.add(objectRequest);
 
 
 //                Intent tansActivity = new Intent(getApplicationContext(),TransfertActivity.class);

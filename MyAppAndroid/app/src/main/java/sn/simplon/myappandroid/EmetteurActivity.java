@@ -67,7 +67,7 @@ public class EmetteurActivity extends AppCompatActivity {
 
 
                 //                //CALL BACKEND
-                String url = "http://192.168.1.27:8080/Emetteur/liste";
+              String url = "http://192.168.122.1:8080/Emetteur/liste";
                 txt_envoie = (TextView) findViewById(R.id.txt_envoie);
 
                 RequestQueue requestQueue = Volley.newRequestQueue(EmetteurActivity.this);
@@ -88,15 +88,16 @@ public class EmetteurActivity extends AppCompatActivity {
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                               // String result = error.toString();
-                               // txt_envoie.setText(result);
+                                String result = error.toString();
+                                System.out.println(error);
+                                txt_envoie.setText(result);
 
                                 String message = null;
                                 if (error instanceof ServerError) {
                                     message = "Cannot connect to Inte1...Please check your connection!";
                                     txt_envoie.setText(message);
 
-                                } else if (error instanceof NetworkError) {
+                                } else if (error instanceof TimeoutError) {
                                     message = "The server could not be found. Please try again after some time!!";
                                     txt_envoie.setText(message);
 
@@ -108,11 +109,11 @@ public class EmetteurActivity extends AppCompatActivity {
                                     message = "Parsing error! Please try again after some time!!";
                                     txt_envoie.setText(message);
 
-                                } else if (error instanceof NoConnectionError) {
+                                } else if (error instanceof NetworkError ) {
                                     message = "Cannot connect to Int3...Please check your connection!";
                                     txt_envoie.setText(message);
 
-                                } else if (error instanceof TimeoutError) {
+                                } else if (error instanceof NoConnectionError) {
                                     message = "Connection TimeOut! Please check your internet connection.";
                                     txt_envoie.setText(message);
 
@@ -126,13 +127,13 @@ public class EmetteurActivity extends AppCompatActivity {
                 requestQueue.add(objectRequest);
 
 
+
+//              postData(emetteur);
 //
-//                postData(emetteur);
 //
-//
-//                Intent recepActivity = new Intent(getApplicationContext(), RecepteurActivity.class);
-//                startActivity(recepActivity);
-//                finish();
+              Intent recepActivity = new Intent(getApplicationContext(), RecepteurActivity.class);
+              startActivity(recepActivity);
+                finish();
             }
         });
     }
