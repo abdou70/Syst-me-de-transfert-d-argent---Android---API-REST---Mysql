@@ -2,6 +2,8 @@ package sn.simplon.myappandroid;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,8 +25,10 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import entities.Emetteur;
 import entities.Recepteur;
 
 public class RecepteurActivity extends AppCompatActivity {
@@ -65,57 +69,94 @@ public class RecepteurActivity extends AppCompatActivity {
                 recepteur.setCni(txt_cni.getText().toString());
                 recepteur.setMontant_recu(txt_mont.getText().toString());
 
-                String url = "http://192.168.1.19:8080/Recepteur/liste";
-                txt_recu = (TextView) findViewById(R.id.txt_recu);
+//                String url = "http://192.168.1.19:8080/Recepteur/liste";
+//                txt_recu = (TextView) findViewById(R.id.txt_recu);
+//
+//                RequestQueue requestQueue = Volley.newRequestQueue(RecepteurActivity.this);
+//                JsonArrayRequest objectRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+//                    @Override
+//                    public void onResponse(JSONArray response) {
+//                        String result = response.toString();
+//                        txt_recu.setText(result);
+//                    }
+//                },
+//                        new Response.ErrorListener() {
+//                            @Override
+//                            public void onErrorResponse(VolleyError error) {
+//                                String message = null;
+//                                if (error instanceof NetworkError ) {
+//                                    message = "Cannot connect to Inte1...Please check your connection!";
+//                                    txt_recu.setText(message);
+//
+//                                } else if (error instanceof ServerError) {
+//                                    message = "The server could not be found. Please try again after some time!!";
+//                                    txt_recu.setText(message);
+//
+//                                } else if (error instanceof AuthFailureError) {
+//                                    message = "Cannot connect to Int2...Please check your connection!";
+//                                    txt_recu.setText(message);
+//
+//                                } else if (error instanceof ParseError) {
+//                                    message = "Parsing error! Please try again after some time!!";
+//                                    txt_recu.setText(message);
+//
+//                                } else if (error instanceof NoConnectionError) {
+//                                    message = "Cannot connect to Int3...Please check your connection!";
+//                                    txt_recu.setText(message);
+//
+//                                } else if (error instanceof TimeoutError) {
+//                                    message = " Connection TimeOut! Please check your internet connection.";
+//                                    txt_recu.setText(message);
+//
+////                                }
+//                            }
+//                        }
+//                );
+//
+//              //  requestQueue.add(objectRequest);
 
-                RequestQueue requestQueue = Volley.newRequestQueue(RecepteurActivity.this);
-                JsonArrayRequest objectRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        String result = response.toString();
-                        txt_recu.setText(result);
-                    }
-                },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                String message = null;
-                                if (error instanceof NetworkError ) {
-                                    message = "Cannot connect to Inte1...Please check your connection!";
-                                    txt_recu.setText(message);
 
-                                } else if (error instanceof ServerError) {
-                                    message = "The server could not be found. Please try again after some time!!";
-                                    txt_recu.setText(message);
+                postData(recepteur);
 
-                                } else if (error instanceof AuthFailureError) {
-                                    message = "Cannot connect to Int2...Please check your connection!";
-                                    txt_recu.setText(message);
-
-                                } else if (error instanceof ParseError) {
-                                    message = "Parsing error! Please try again after some time!!";
-                                    txt_recu.setText(message);
-
-                                } else if (error instanceof NoConnectionError) {
-                                    message = "Cannot connect to Int3...Please check your connection!";
-                                    txt_recu.setText(message);
-
-                                } else if (error instanceof TimeoutError) {
-                                    message = " Connection TimeOut! Please check your internet connection.";
-                                    txt_recu.setText(message);
-
-                                }
-                            }
-                        }
-                );
-
-                requestQueue.add(objectRequest);
-
-
-//                Intent tansActivity = new Intent(getApplicationContext(),TransfertActivity.class);
-//                startActivity(tansActivity);
-//                finish();
+                Intent tansActivity = new Intent(getApplicationContext(),TransfertActivity.class);
+                startActivity(tansActivity);
+                finish();
             }
         });
+    }
+
+    public void postData(Recepteur recepteur){
+
+        txt_recu = (TextView) findViewById(R.id.txt_recu);
+
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        JSONObject object = new JSONObject();
+
+        try{
+            object.put("recepteur", recepteur);
+            System.out.println(recepteur);
+        }catch(JSONException e){
+            e.printStackTrace();
+
+        }
+
+        String url = "http://192.168.1.19:8080/Recepteur/save";
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url,object, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                txt_recu.setText("String Response : " + response.toString());
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                txt_recu.setText("Error Getting Response");
+
+            }
+
+        });
+        requestQueue.add(jsonObjectRequest);
     }
 }
