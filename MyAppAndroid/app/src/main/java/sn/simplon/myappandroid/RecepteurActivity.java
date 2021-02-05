@@ -18,9 +18,11 @@ import com.android.volley.Response;
 import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import entities.Recepteur;
@@ -63,13 +65,13 @@ public class RecepteurActivity extends AppCompatActivity {
                 recepteur.setCni(txt_cni.getText().toString());
                 recepteur.setMontant_recu(txt_mont.getText().toString());
 
-                String url = "http://192.168.122.1:8080/Recepteur/liste";
+                String url = "http://192.168.1.19:8080/Recepteur/liste";
                 txt_recu = (TextView) findViewById(R.id.txt_recu);
 
                 RequestQueue requestQueue = Volley.newRequestQueue(RecepteurActivity.this);
-                JsonObjectRequest objectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+                JsonArrayRequest objectRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
                     @Override
-                    public void onResponse(JSONObject response) {
+                    public void onResponse(JSONArray response) {
                         String result = response.toString();
                         txt_recu.setText(result);
                     }
@@ -99,7 +101,7 @@ public class RecepteurActivity extends AppCompatActivity {
                                     txt_recu.setText(message);
 
                                 } else if (error instanceof TimeoutError) {
-                                    message = "Connection TimeOut! Please check your internet connection.";
+                                    message = " Connection TimeOut! Please check your internet connection.";
                                     txt_recu.setText(message);
 
                                 }

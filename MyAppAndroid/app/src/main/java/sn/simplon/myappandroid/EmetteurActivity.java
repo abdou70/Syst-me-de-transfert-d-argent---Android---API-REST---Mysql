@@ -20,9 +20,11 @@ import com.android.volley.Response;
 import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -67,17 +69,17 @@ public class EmetteurActivity extends AppCompatActivity {
 
 
                 //                //CALL BACKEND
-              String url = "http://192.168.122.1:8080/Emetteur/liste";
+              String url = "http://192.168.1.19:8080/Emetteur/liste";
                 txt_envoie = (TextView) findViewById(R.id.txt_envoie);
 
                 RequestQueue requestQueue = Volley.newRequestQueue(EmetteurActivity.this);
-                JsonObjectRequest objectRequest = new JsonObjectRequest(
+                JsonArrayRequest objectRequest = new JsonArrayRequest(
                         Request.Method.GET,
                         url,
                         null,
-                        new Response.Listener<JSONObject>() {
+                        new Response.Listener<JSONArray>() {
                             @Override
-                            public void onResponse(JSONObject response) {
+                            public void onResponse(JSONArray response) {
 
                                 String result = response.toString();
                                 txt_envoie.setText(result);
@@ -131,9 +133,9 @@ public class EmetteurActivity extends AppCompatActivity {
 //              postData(emetteur);
 //
 //
-              Intent recepActivity = new Intent(getApplicationContext(), RecepteurActivity.class);
-              startActivity(recepActivity);
-                finish();
+//              Intent recepActivity = new Intent(getApplicationContext(), RecepteurActivity.class);
+//              startActivity(recepActivity);
+//                finish();
             }
         });
     }
